@@ -1,9 +1,12 @@
 import { Router } from 'express';
-var router = Router();
+import tasks from './tasks';
+import users from './users';
+import files from './files';
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
-});
+const router = Router();
+
+router.use('/', tasks);
+router.use('/', users);
+router.use('/files', files);
 
 export default router;

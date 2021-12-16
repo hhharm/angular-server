@@ -5,23 +5,38 @@
   "scripts": {
     "prebuild": "eslint --fix",
     "build": "tsc",
+    "build:watch": "tsc --watch",
     "prestart": "npm run build",
-    "start": "node ./build/app.js"
+    "start": "node ./build/app.js",
+    "only-start": "node ./build/app.js",
+    "fill-db": "node ./build/fill-db.js"
   },
   "dependencies": {
+    "busboy": "^0.3.1",
+    "connect-busboy": "0.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
+    "express-fileupload": "^1.2.1",
     "express-winston": "^4.2.0",
+    "fp-ts": "^2.11.5",
+    "io-ts": "^2.2.16",
+    "io-ts-excess": "^1.0.1",
+    "io-ts-extra": "^0.11.6",
+    "io-ts-reporters": "^2.0.0",
+    "redis": "^4.0.1",
     "typescript": "^4.5.4",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/connect-busboy": "0.0.4",
     "@types/cookie-parser": "^1.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
+    "axios": "^0.24.0",
     "eslint": "^8.4.1"
   }
 }

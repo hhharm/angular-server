@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>File Upload using XHR</title>
+        <style>
+            p {
+                font-family: 'Roboto';
+            }
+            input[type='file'] {
+                position: absolute;
+                top: 67px;
+                left: 22px;
+            }
+            input[type='submit'] {
+                visibility: hidden;
+            }
+            .button {
+                background: #cde1ee;
+                color: #000;
+                width: 180px;
+                padding: 5px;
+                border-radius: 3px;
+                position: relative;
+                z-index: 100;
+                font-family: 'Roboto';
+                text-align: center;
+                user-select: none;
+                margin-bottom: 10px;
+            }
+            .button-1 {
+                margin-top: 10px;
+                background: #3498db;
+                width: 180px;
+                padding: 5px;
+                border-radius: 3px;
+                position: relative;
+                z-index: 100;
+                font-family: 'Roboto';
+                text-align: center;
+                color: #fff;
+                user-select: none;
+            }
+
+            .button:hover,
+            .button-1:hover {
+                cursor: pointer;
+            }
+
+            .button:after,
+            .button-1::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 10%;
+                border-radius: 50%;
+                background-color: darken(#f1c40f, 20%);
+                opacity: 0.4;
+                bottom: -30px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script type="text/javascript">
+            window.onload = function () {
+                var myForm = document.getElementById('myForm');
+
+                myForm.onsubmit = function (event) {
+                    event.preventDefault;
+                    var myFile = document.getElementById('file-upload');
+                    var mySubmit = document.getElementById('submit');
+                    var files = myFile.files;
+
+                    var formData = new FormData();
+
+                    formData.append('myFile', files[0], files[0].name);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open(
+                        'POST',
+                        'http://127.0.0.1:3000/files/upload',
+                        true
+                    );
+
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            alert('File successfully uploaded');
+                        } else {
+                            alert('File upload failed!');
+                        }
+                    };
+
+                    xhr.send(formData);
+                };
+            };
+        </script>
+        <iframe
+            name="dummyframe"
+            id="dummyframe"
+            style="display: none"
+        ></iframe>
+
+        <p>
+            Choose file and press upload. The page will reload. If you don't see
+            error then everything went fine ;'D
+            <br />
+            But anyway, check on server that file is uploaded.
+        </p>
+        <form
+            target="dummyframe"
+            id="myForm"
+            action="/upload"
+            method="post"
+            enctype="multipart/form-data"
+            style="margin: 0 auto"
+        >
+            <label role="button" for="file-upload" class="button">
+                Choose a File
+            </label>
+            <input id="file-upload" type="file" name="myFile" />
+            <br /><br />
+            <label role="button" for="submit" class="button-1">
+                Upload to Server
+            </label>
+            <input type="submit" id="submit" name="submit" />
+        </form>
+    </body>
+</html>
